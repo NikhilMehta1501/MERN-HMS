@@ -1,27 +1,24 @@
 const mongoose = require('mongoose')
-const slug = require('mongoose-slug-updater')
+const slug = require('mongoose-slug-generator')
 mongoose.plugin(slug)
 
-const AddressSchema = mongoose.Schema({
-  pincode: Number,
-  city: String,
-  street: String,
-  district: String,
-  buildingNumber: String
-});
+// const AddressSchema = mongoose.Schema({
+//   pincode: Number,
+//   city: String,
+//   street: String,
+//   district: String,
+//   buildingNumber: String
+// });
 
 const HospitalSchema = new mongoose.Schema({
   name : {
     type: String,
     required: true,
-    unique: true
   },
   slug: {
     type: String,
-    required: true,
     unique: true,
     slug: "name",
-    slugPaddingSize: 5
   },
   hospitalType: {
     type: String,
@@ -34,13 +31,13 @@ const HospitalSchema = new mongoose.Schema({
     default: 'private'
   },
   address: {
-    country: { String, required: true },
-    state: { String, required: true },
-    city: { String, required: true },
+    country: String,
+    state: String,
+    city: String,
     street: String,
     district: String,
-    pincode: { Number, required: true },
-    buildingNumber: { String, required: true },
+    pincode: Number,
+    buildingNumber: String,
     landmark: String
   },
   phoneNumber: {
@@ -53,14 +50,13 @@ const HospitalSchema = new mongoose.Schema({
   },
   admins: [
     {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
     }
   ],
   description: {
     type: String
   }
-  
 })
 
 module.exports = mongoose.model('Hospital', HospitalSchema)

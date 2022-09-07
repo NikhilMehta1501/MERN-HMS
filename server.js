@@ -77,11 +77,14 @@ app.disable('x-powered-by')
 //------Middleware END------
 
 //Routes
+//Auth Routes
 const { authRoutes } = require('./routes/api')
 app.use('/api/auth', authRoutes)
 
-// const { hospitalRoutes } = require('./routes/api')
-// app.use('/api/hospital', passport.authenticate("jwt", { session: false }), hospitalRoutes)
+//Hospital Routes
+const { hospitalRoutes } = require('./routes/api')
+app.use('/api/hospital', passport.authenticate("jwt", { session: false }), hospitalRoutes)
+// app.use('/api/hospital', hospitalRoutes)
 
 // All other GET requests not handled before will return our React app
 app.get('*', (req, res) => {
