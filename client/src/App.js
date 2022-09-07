@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import Header from './Components/Layouts/Header';
+import Loader from './Components/Layouts/Loader';
 import Home from './Components/Pages/Home';
 import Hospital from './Components/Pages/Hospital/Hospital';
 import Login from './Components/Pages/Auth/Login';
@@ -13,9 +14,11 @@ const App = () => {
 
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
   const [userData, setUserData] = useState({})
+  const [isLoading, setIsLoading] = useState(false)
 
   return (
     <BrowserRouter>
+      <Loader isLoading={isLoading}/>
       <Header userData={userData} setUserData={value => setUserData(value)} setIsUserLoggedIn={ value => setIsUserLoggedIn(value)} isUserLoggedIn={isUserLoggedIn}/>
       <div className="container">
         <Switch>
